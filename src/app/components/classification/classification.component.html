@@ -5,9 +5,9 @@
             <th></th>
             <th>Name</th>
             <th class="text-center">Games</th>
-            <th>W</th>
-            <th>L</th>
-            <th>D</th>
+            <th class="text-center">W</th>
+            <th class="text-center">L</th>
+            <th class="text-center">D</th>
             <th class="text-center">Goal Difference</th>
             <th class="text-center">Points</th>
         </tr>
@@ -18,9 +18,9 @@
             <td> <img [src]="standing.team.logo"> </td>
             <td>{{standing.team.name}}</td>
             <td class="text-center">{{standing.all.played}}</td>
-            <td>{{standing.all.win}}</td>
-            <td>{{standing.all.lose}}</td>
-            <td>{{standing.all.draw}}</td>
+            <td class="text-center">{{standing.all.win}}</td>
+            <td class="text-center">{{standing.all.lose}}</td>
+            <td class="text-center">{{standing.all.draw}}</td>
             <td class="text-center">{{standing.goalsDiff}}</td>
             <td class="text-center">{{standing.points}}</td>
         </tr>
