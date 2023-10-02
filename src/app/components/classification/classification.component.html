@@ -4,12 +4,12 @@
             <th></th>
             <th></th>
             <th>Name</th>
-            <th>Games</th>
+            <th class="text-center">Games</th>
             <th>W</th>
             <th>L</th>
             <th>D</th>
-            <th>Goal Difference</th>
-            <th>Points</th>
+            <th class="text-center">Goal Difference</th>
+            <th class="text-center">Points</th>
         </tr>
     </thead>
     <tbody>
@@ -17,12 +17,12 @@
             <td>{{standing.rank}}</td>
             <td> <img [src]="standing.team.logo"> </td>
             <td>{{standing.team.name}}</td>
-            <td>{{standing.all.played}}</td>
+            <td class="text-center">{{standing.all.played}}</td>
             <td>{{standing.all.win}}</td>
             <td>{{standing.all.lose}}</td>
             <td>{{standing.all.draw}}</td>
-            <td>{{standing.goalsDiff}}</td>
-            <td>{{standing.points}}</td>
+            <td class="text-center">{{standing.goalsDiff}}</td>
+            <td class="text-center">{{standing.points}}</td>
         </tr>
     </tbody>
 </table>
