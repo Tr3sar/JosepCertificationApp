@@ -7,14 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { ClassificationComponent } from './components/classification/classification.component';
-import { TeamDetailsComponent } from './components/team-details/team-details.component';
+import { TeamHistoryComponent } from './components/team-history/team-history.component';
 import { HeadersInterceptor } from './interceptors/headers.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClassificationComponent,
-    TeamDetailsComponent
+    TeamHistoryComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,10 @@
-export interface TeamDetailsResponse {
+export interface TeamHistoryResponse {
     get: string
     parameters: Parameters
     errors: any[]
     results: number
     paging: Paging
-    response: TeamDetails[]
+    response: TeamHistory[]
   }
   
   export interface Parameters {
@@ -17,7 +17,7 @@ export interface TeamDetailsResponse {
     total: number
   }
   
-  export interface TeamDetails {
+  export interface TeamHistory {
     fixture: Fixture
     league: League
     teams: Teams

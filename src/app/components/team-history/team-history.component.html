@@ -1,4 +1,4 @@
-<div *ngIf="teamDetailsData$ | async as teamHistoryMatches; else loading" class="container">
+<div *ngIf="teamHistoryData$ | async as teamHistoryMatches; else loading" class="container">
     <table class="table">
         <tr *ngFor="let match of teamHistoryMatches" class="">
             <td><img [src]="match.teams.home.logo"></td>
