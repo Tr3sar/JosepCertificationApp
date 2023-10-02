@@ -1,0 +1,24 @@
+<div *ngIf="teamDetailsData$ | async as teamHistoryMatches; else loading" class="container">
+    <table class="table">
+        <tr *ngFor="let match of teamHistoryMatches" class="">
+            <td><img [src]="match.teams.home.logo"></td>
+            <td><span>{{match.teams.home.name}}</span></td>                            
+            <td><span>{{match.goals.home}}</span></td>
+            <td><span>-</span></td>
+            <td><span>{{match.goals.away}}</span></td>
+            <td><span>{{match.teams.away.name}}</span></td>
+            <td><img [src]="match.teams.away.logo"></td>
+        </tr>
+    </table>
+    
+    <button type="button" class="btn btn-primary mt-2" (click)="this.location.back()">
+        Back
+    </button>
+
+</div>
+
+<ng-template #loading>
+    <div class="alert alert-warning text-center">
+        Loading...
+    </div>
+</ng-template>

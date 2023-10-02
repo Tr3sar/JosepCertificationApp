@@ -1,0 +1,8 @@
+<ul class="list-group">
+    <button *ngFor="let country of countries" class="list-group-item" id="{{country.countryName | lowercase}}Select"
+    [routerLink]="['classification', country.id]" [ngStyle]="{'background-color': country.id === selectedCountryId ? '#49CADF' : ''}"
+
+    (click)="changeSelectedCountry(country.id)">
+        {{country.countryName}}
+    </button>
+</ul>
