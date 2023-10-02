@@ -4,32 +4,20 @@ import { environment } from 'src/environments/environment';
 
 import { ClassificationResponse, Standing } from '../interfaces/ClassificationResponse.interface';
 import { Observable, map, of, tap } from 'rxjs';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassificationService {
 
-  private apiEndpoint: string = environment.API_URL + '/standings'; 
-  private TTL: number = 24 * 60 * 60 * 1000;
+  private apiEndpoint: string = environment.API_URL + '/standings';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cacheService: CacheService) { }
 
   getClassification(leagueId: number) : Observable<Standing[]> {
-    const cacheKey = `classification_${leagueId}`;
-    const cacheTimestampKey = `classification_${leagueId}_timestamp`;
-
-    const cachedData = localStorage.getItem(cacheKey);
-    const cachedTimestamp = localStorage.getItem(cacheTimestampKey);
-
-    if (cachedData && cachedTimestamp) {
-      const currentTime = new Date().getTime();
-      const cachedTime = parseInt(cachedTimestamp, 10);
-
-      if (currentTime - cachedTime < this.TTL) {
-        return of(JSON.parse(cachedData));
-      }
-    }
+    const cacheData = this.cacheService.getById(leagueId, 'history');
+    if (cacheData != null) { return <Observable<Standing[]>> cacheData; }
 
     const date = new Date();
     let actualYear = date.getFullYear();
@@ -44,8 +32,7 @@ export class ClassificationService {
     
     return this.http.get<ClassificationResponse>(this.apiEndpoint, {params: parameters}).pipe(
       map((classificationResponse: ClassificationResponse) => classificationResponse.response[0].league.standings[0]),
-      tap(classification => localStorage.setItem(cacheKey, JSON.stringify(classification))),
-      tap(() => {localStorage.setItem(cacheTimestampKey, new Date().getTime().toString())})
+      tap(classification => this.cacheService.setCacheData(leagueId, 'classification', classification))
     )
   }
 }
