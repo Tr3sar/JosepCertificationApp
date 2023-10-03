@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 import { ClassificationResponse, Standing } from '../interfaces/ClassificationResponse.interface';
-import { Observable, map, of, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 import { CacheService } from './cache.service';
 
 @Injectable({
@@ -32,7 +32,8 @@ export class ClassificationService {
     
     return this.http.get<ClassificationResponse>(this.apiEndpoint, {params: parameters}).pipe(
       map((classificationResponse: ClassificationResponse) => classificationResponse.response[0].league.standings[0]),
-      tap(classification => this.cacheService.setCacheData(leagueId, 'classification', classification))
+      tap(classification => this.cacheService.setCacheData(leagueId, 'classification', classification)),
+      catchError(err => of([]))
     )
   }
 }

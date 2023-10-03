@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Observable, map, of, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TeamHistory, TeamHistoryResponse } from '../interfaces/TeamHistoryResponse.interface';
 import { CacheService } from './cache.service';
@@ -28,7 +28,8 @@ export class TeamHistoryService {
 
     return this.http.get<TeamHistoryResponse>(this.apiEndpoint, {params: parameters}).pipe(
       map((response: TeamHistoryResponse) => response.response),
-      tap(teamHistory => this.cacheService.setCacheData(teamId, 'history', teamHistory))
+      tap(teamHistory => this.cacheService.setCacheData(teamId, 'history', teamHistory)),
+      catchError(err => of([]))
     )
   }
 }

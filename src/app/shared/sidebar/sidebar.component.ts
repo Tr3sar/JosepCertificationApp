@@ -40,7 +40,6 @@ export class SidebarComponent {
   }
 
   changeSelectedCountry(countryId: number) {
-    console.log(countryId)
     this.selectedCountryId = countryId;
   }
 }
